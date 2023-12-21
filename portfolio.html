@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- defining meta data and adding image and stylesheet -->
+    <meta name="author" content="Shivansh Gupta">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <link rel="stylesheet" href="style.css">
+    <title>Portfolio</title>
+</head>
+<body>
+    
+    <!-- navigation bar -->
+    <header class="header">
+        <a href="#" class="logo">Portfolio</a>
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section class="home" id="home">
+        <div class="home-content">
+            <h3>Hello, It's Me</h3>
+            <h1 id="nameField"></h1><br>
+            <p id="aboutField">
+            </p>
+            <div class="home-me">
+                <a href="https://www.instagram.com/shivanshgupta2003/" target="_blank"><img src="images/instagram.png" alt="instagram"></a>
+                <a href="https://www.facebook.com/shivansh.gupta.359778" target="_blank"><img src="images/facebook.png" alt="facebook"></a>
+                <a href="https://www.linkedin.com/in/shivansh-gupta-22m03/" target="_blank"><img src="images/linkedin.png" alt="linkedin"></a>
+                <a href="https://github.com/Shivansh220503" target="_blank"><img src="images/github.png" alt="github"></a><br>
+                <p class="btn-box">More about me...</p>
+            </div>
+        </div>
+        <div class="bg-img">
+            <img src="images/background.png" alt="Profile image">
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <img src="images/background.png">
+        <div class="about-text">
+            <h2>About <span>Me</span></h2>
+            <h4>Computer Engineer!</h4>
+            <p id="aqField">
+                <b>Education - </b><br>
+            </p>
+            <p class="btn-box">More about me</p>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2>Latest <span>Projects</span></h2>
+            <div class="projects-list" id="projectsList">
+            </div>
+        </div>
+    </section>
+
+    <!-- My Skills-->
+    <h1 class="sub-title" id="skills">My <span>Skills</span></h1>
+    <section class="myskills">
+        <div class="container1">
+            <h1 class="heading1">Technical Skills</h1>
+            <ul id="technicalSkills">
+            </ul>
+        </div>
+        <div class="container1">
+            <h1 class="heading1">Professional Skills</h1>
+            <ul id="professionalSkills">
+                <li>Management</li>
+                <li>communication</li>
+                <li>Leadership</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="contact-text">
+            <h2>Contact <span>Me</span></h2>
+            <h4>Let's Work Together</h4>
+            <p>I'm excited to collaborate with you on interesting projects! Whether you have a question,
+                a project idea, or just want to say hello, feel free to reach out. I'm here to help and
+                make a positive impact together.</p>
+            <div class="contact-list">
+                <ul>
+                    <li id="gmailField"></li>
+                    <li id="contactField"></li>
+                </ul>
+            </div>
+            <div class="contact-icons">
+                <a href="https://www.instagram.com/shivanshgupta2003/" target="_blank"><img src="images/instagram.png" alt="instagram"></a>
+                <a href="https://www.facebook.com/shivansh.gupta.359778" target="_blank"><img src="images/facebook.png" alt="facebook"></a>
+                <a id="linkedinField" href="#" target="_blank"><img src="images/linkedin.png" alt="linkedin"></a>
+                <a id="githubField" href="#" target="_blank"><img src="images/github.png" alt="github"></a>
+            </div>
+        </div>
+        <div class="contact-form">
+            <form action="">
+                <input type="text" placeholder="Enter Your Name" required>
+                <input type="email" placeholder="Enter Your Email" required>
+                <input type="text" placeholder="Enter Your Subject">
+                <textarea name="message" id="" cols="40" rows="10" placeholder="Enter Your Message"></textarea>
+                <input type="submit" value="Submit" class="send">
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="last-text">
+        <p>&copy; &nbsp; Developed By Shivansh Gupta</p>
+    </div>
+    <a href="#" class="top"><img src="images/toparrow.png"></a>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            onload();
+        });
+        function onload() {
+            document.getElementById("nameField").innerHTML = localStorage.getItem("nameField");
+            document.getElementById("contactField").innerHTML = '<img src="images/phone.png"> ' + localStorage.getItem("contactField");
+            document.getElementById("aboutField").innerHTML = localStorage.getItem("aboutField");
+            document.getElementById("linkedinField").href = 'https://www.linkedin.com/in/' + localStorage.getItem("githubField");
+            document.getElementById("githubField").href = 'https://github.com/' + localStorage.getItem("githubField");
+            document.getElementById("gmailField").innerHTML = '<img src="images/gmail.png"> ' + localStorage.getItem("gmailField");
+
+            let skillsText = localStorage.getItem("skillsField");
+            let skillsArray = skillsText.split('\n');
+            skillsArray.forEach(function (skill) {
+                if (skill.trim() !== "") {
+                    let skillItem = document.createElement("li");
+                    skillItem.textContent = skill.trim();
+                    document.getElementById("technicalSkills").appendChild(skillItem);
+                }
+            });
+
+            let aqArray = JSON.parse(localStorage.getItem("aqField"));
+            let aqParagraph = document.getElementById("aqField");
+            aqArray.forEach(function (aq) {
+                aqParagraph.innerHTML += aq.trim() + '<br>';
+            });
+
+            let projectsArray = JSON.parse(localStorage.getItem("projectField"));
+            let projectsList = document.getElementById("projectsList");
+            projectsArray.forEach(function (project) {
+                let projectColumn = document.createElement("div");
+                projectColumn.innerHTML = `
+                    <img src="images/code.png" alt="code">
+                    <p>${project}</p>
+                    <a href="#" class="read">Learn more</a>
+                `;
+                projectsList.appendChild(projectColumn);
+            });
+        }
+    </script>
+</body>
+</html>
